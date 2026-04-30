@@ -14,7 +14,7 @@ import { ArrowLeft } from 'lucide-react';
 
 const categoryMap = {
   'trending-movies': { title: 'Trending Movies', fetchFn: getTrendingMovies, isTV: false },
-  'popular-on-streamverse': { title: 'Popular on StreamVerse', fetchFn: getPopularMovies, isTV: false },
+  'popular-on-NiteOwl': { title: 'Popular on NiteOwl', fetchFn: getPopularMovies, isTV: false },
   'top-rated-classics': { title: 'Top Rated Classics', fetchFn: getTopRatedMovies, isTV: false },
   'trending-tv-shows': { title: 'Trending TV Shows', fetchFn: getTrendingTV, isTV: true },
   'top-animation': { title: 'Top Animation', fetchFn: getAnimationMovies, isTV: false },

@@ -35,7 +35,7 @@ const Login = () => {
           <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shadow-[0_0_20px_rgba(229,9,20,0.5)]">
             <Play fill="white" className="w-5 h-5 text-white" />
           </div>
-          <span className="font-heading text-3xl tracking-wider text-white">Stream<span className="text-accent">Verse</span></span>
+          <span className="font-heading text-3xl tracking-wider text-white">Nite<span className="text-accent">Owl</span></span>
         </div>
 
         <h2 className="text-2xl font-bold text-white mb-6 text-center">Welcome Back</h2>
@@ -71,7 +71,7 @@ const Login = () => {
         </form>
 
         <p className="mt-6 text-center text-sm text-text-secondary">
-          New to StreamVerse? <Link to="/signup" className="text-accent hover:text-white transition-colors">Sign up now</Link>
+          New to NiteOwl? <Link to="/signup" className="text-accent hover:text-white transition-colors">Sign up now</Link>
         </p>
       </div>
     </div>

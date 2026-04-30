@@ -56,7 +56,7 @@ const Player = () => {
         <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-10 bg-gradient-to-b from-black/80 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="flex items-center gap-3">
              <div className="w-3 h-3 rounded-full bg-accent animate-pulse shadow-[0_0_10px_rgba(0,230,186,0.8)]"></div>
-             <span className="text-white font-bold text-sm tracking-widest uppercase opacity-80">StreamVerse Player</span>
+             <span className="text-white font-bold text-sm tracking-widest uppercase opacity-80">NiteOwl Player</span>
           </div>
           <button 
             onClick={() => navigate(-1)} 

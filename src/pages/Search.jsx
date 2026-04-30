@@ -55,7 +55,7 @@ const Search = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-heading mb-6 flex items-center gap-3">
           <SearchIcon className="w-8 h-8 text-accent" />
-          {query ? `Search Results for "${query}"` : 'Search StreamVerse'}
+          {query ? `Search Results for "${query}"` : 'Search NiteOwl'}
         </h1>
 
         {/* Filters */}

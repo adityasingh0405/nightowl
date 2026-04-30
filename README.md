@@ -1,6 +1,6 @@
-# NightOwl (StreamVerse) 🦉🎬
+# NiteOwl 🦉🎬
 
-NightOwl is a premium, fully-responsive streaming platform interface built with React and Tailwind CSS. Designed with a sleek, glassmorphic "Dribbble-style" aesthetic, it allows users to discover movies and TV shows, manage personal watchlists, and seamlessly stream content via an integrated third-party player.
+NiteOwl is a premium, fully-responsive streaming platform interface built with React and Tailwind CSS. Designed with a sleek, glassmorphic "Dribbble-style" aesthetic, it allows users to discover movies and TV shows, manage personal watchlists, and seamlessly stream content via an integrated third-party player.
 
 ## ✨ Features
 

@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #000E0A; /* Darkest teal/black */
+  --color-bg-surface: #191B1C; /* Dark grey panel */
+  --color-bg-raised: #2a2d33; /* Lighter grey for inner cards */
+  --color-bg-overlay: #383B3D;
+  --color-accent: #00E6BA; /* Bright Cyan */
+  --color-accent-alt: #00BA97;
+  --color-gold: #ffb800;
+  --color-text-primary: #f0f0f8;
+  --color-text-secondary: #9BA3A8;
+  --color-text-muted: #595F61;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-base text-text-primary font-body antialiased overflow-x-hidden;
+    /* Main body background to frame the floating app */
+    background-color: #0d1117; /* Very dark navy to contrast with app container */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-overlay); 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted); 
+}
+
+/* Hide scrollbar for clean horizontal scrolling rows but keep functionality */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(25, 27, 28, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel {
+  background: rgba(42, 45, 51, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glow effects */
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(0, 230, 186, 0.4);
+}

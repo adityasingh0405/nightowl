@@ -11,13 +11,19 @@ const Signup = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      signup(name, email, password);
+      await signup(name, email, password);
       navigate('/');
     } catch (err) {
-      setError(err.message);
+      if (err.code === 'auth/email-already-in-use') {
+        setError('Email already in use');
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password should be at least 6 characters');
+      } else {
+        setError(err.message);
+      }
     }
   };
 

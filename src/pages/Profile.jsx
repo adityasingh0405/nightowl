@@ -27,11 +27,15 @@ const Profile = () => {
     setEditValue(initialValue);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!editValue.trim()) return;
-    updateUser({ [editingField]: editValue });
-    setEditingField(null);
-    setEditValue("");
+    try {
+      await updateUser({ [editingField]: editValue });
+      setEditingField(null);
+      setEditValue("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleFileUpload = (e) => {
@@ -148,29 +152,12 @@ const Profile = () => {
                   </div>
                   <div className="flex-1 mr-4">
                     <p className="text-xs text-text-secondary mb-1 uppercase tracking-wider font-bold">Email Address</p>
-                    {editingField === 'email' ? (
-                      <input 
-                        type="email" 
-                        value={editValue} 
-                        onChange={(e) => setEditValue(e.target.value)} 
-                        className="bg-[#161819] text-white border border-accent/50 rounded-md px-3 py-1.5 w-full focus:outline-none focus:border-accent"
-                        autoFocus
-                      />
-                    ) : (
-                      <p className="text-white font-medium">{user.email}</p>
-                    )}
+                    <p className="text-white font-medium">{user.email}</p>
                   </div>
                 </div>
-                {editingField === 'email' ? (
-                  <div className="flex gap-2">
-                    <button onClick={() => setEditingField(null)} className="text-xs font-bold text-text-secondary hover:text-white px-3 py-2 rounded-full transition-colors">Cancel</button>
-                    <button onClick={handleSave} className="text-xs font-bold text-black bg-accent hover:bg-white px-4 py-2 rounded-full transition-colors">Save</button>
-                  </div>
-                ) : (
-                  <button onClick={() => handleEdit('email', user.email)} className="text-xs font-bold text-black bg-white hover:bg-gray-200 px-4 py-2 rounded-full transition-colors flex-shrink-0">
-                    Edit
-                  </button>
-                )}
+                <span className="text-xs font-bold text-text-secondary px-4 py-2 bg-black/20 rounded-full border border-white/5">
+                  Verified
+                </span>
               </div>
 
               {/* Password */}
@@ -181,49 +168,14 @@ const Profile = () => {
                   </div>
                   <div className="flex-1 mr-4">
                     <p className="text-xs text-text-secondary mb-1 uppercase tracking-wider font-bold">Password</p>
-                    {editingField === 'password' ? (
-                      <div className="relative w-full">
-                        <input 
-                          type={showPassword ? "text" : "password"} 
-                          value={editValue} 
-                          onChange={(e) => setEditValue(e.target.value)} 
-                          className="bg-[#161819] text-white border border-accent/50 rounded-md px-3 py-1.5 w-full focus:outline-none focus:border-accent pr-10"
-                          placeholder="Enter new password"
-                          autoFocus
-                        />
-                        <button 
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-white transition-colors"
-                        >
-                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-3">
-                        <p className={`text-white font-medium mt-1 ${!showCurrentPassword ? 'tracking-[0.2em]' : ''}`}>
-                          {showCurrentPassword ? getPassword() : "••••••••••••"}
-                        </p>
-                        <button 
-                          onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                          className="text-text-secondary hover:text-white mt-1 transition-colors"
-                        >
-                          {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                    )}
+                    <div className="flex items-center gap-3">
+                      <p className="text-white font-medium mt-1 tracking-[0.2em]">••••••••••••</p>
+                    </div>
                   </div>
                 </div>
-                {editingField === 'password' ? (
-                  <div className="flex gap-2">
-                    <button onClick={() => { setEditingField(null); setShowPassword(false); }} className="text-xs font-bold text-text-secondary hover:text-white px-3 py-2 rounded-full transition-colors">Cancel</button>
-                    <button onClick={() => { handleSave(); setShowPassword(false); }} className="text-xs font-bold text-black bg-accent hover:bg-white px-4 py-2 rounded-full transition-colors">Save</button>
-                  </div>
-                ) : (
-                  <button onClick={() => handleEdit('password', '')} className="text-xs font-bold text-white bg-transparent border border-white/20 hover:bg-white/10 px-4 py-2 rounded-full transition-colors flex-shrink-0">
-                    Change
-                  </button>
-                )}
+                <span className="text-xs font-bold text-green-400 px-4 py-2 bg-green-400/10 rounded-full border border-green-400/20">
+                  Secured
+                </span>
               </div>
               
               {/* Personal Info */}

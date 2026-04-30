@@ -1,47 +1,58 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAuth } from "./AuthContext";
+import { db } from "../firebase";
+import { collection, doc, setDoc, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 
 const WatchHistoryContext = createContext();
 
 export function WatchHistoryProvider({ children }) {
   const { user } = useAuth();
-  // We store all watch histories in a single object mapped by userId
-  const [allHistories, setAllHistories] = useLocalStorage("streamverse_history", {});
-  
-  // Current user's history
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
+    let unsubscribe;
     if (user) {
-      setHistory(allHistories[user.id] || []);
+      const historyRef = collection(db, `users/${user.id}/history`);
+      const q = query(historyRef, orderBy("timestamp", "desc"), limit(12));
+      unsubscribe = onSnapshot(q, (snapshot) => {
+        const items = [];
+        snapshot.forEach((doc) => {
+          items.push(doc.data());
+        });
+        setHistory(items);
+      });
     } else {
       setHistory([]);
     }
-  }, [user, allHistories]);
 
-  const addToHistory = (item) => {
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [user]);
+
+  const addToHistory = async (item) => {
     if (!user) return;
     
-    // Remove if it already exists so we can move it to the front
-    const filteredHistory = history.filter(h => h.id !== item.id);
-    
-    // Create minimal history object
     const historyItem = {
       id: item.id,
-      title: item.title || item.name,
-      img: item.backdrop_path || item.poster_path,
+      title: item.title || item.name || "Unknown Title",
+      img: item.backdrop_path || item.poster_path || "",
       media_type: item.title ? 'movie' : 'tv',
       timestamp: Date.now()
     };
 
-    const updatedHistory = [historyItem, ...filteredHistory].slice(0, 10); // Keep max 10
-    
-    setHistory(updatedHistory);
-    setAllHistories(prev => ({
-      ...prev,
-      [user.id]: updatedHistory
-    }));
+    // Optimistically update UI
+    setHistory(prev => {
+      const filtered = prev.filter(h => h.id !== item.id);
+      return [historyItem, ...filtered].slice(0, 10);
+    });
+
+    try {
+      const docRef = doc(db, `users/${user.id}/history`, item.id.toString());
+      await setDoc(docRef, historyItem);
+    } catch (err) {
+      console.error("Failed to add to watch history:", err);
+    }
   };
 
   const value = {

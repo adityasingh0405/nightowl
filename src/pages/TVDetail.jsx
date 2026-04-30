@@ -76,9 +76,9 @@ const TVDetail = () => {
   };
 
   return (
-    <div className="pb-12 bg-transparent min-h-screen px-8">
+    <div className="pb-12 bg-transparent min-h-screen md:px-8">
       {/* Hero Backdrop Box */}
-      <div className="relative h-[60vh] w-full rounded-[40px] overflow-hidden shadow-2xl mb-8 border border-white/5">
+      <div className="relative h-[70vh] md:h-[60vh] w-full md:rounded-[40px] overflow-hidden shadow-2xl mb-8 border-b md:border border-white/5">
         <img 
           src={tv.backdrop_path ? `${IMG_ORIGINAL}${tv.backdrop_path}` : `${IMG_500}${tv.poster_path}`} 
           alt={tv.name}
@@ -88,8 +88,8 @@ const TVDetail = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#000E0A] via-[#000E0A]/80 to-transparent"></div>
 
         {/* Content overlaid on backdrop */}
-        <div className="absolute inset-0 flex items-center p-14 z-10">
-          <div className="flex flex-col md:flex-row gap-10 items-center w-full">
+        <div className="absolute inset-0 flex items-center p-6 md:p-14 z-10 pt-20 md:pt-14">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start md:items-center w-full mt-auto md:mt-0">
             
             {/* Poster */}
             <div className="w-64 flex-shrink-0 hidden md:block">
@@ -101,10 +101,10 @@ const TVDetail = () => {
             </div>
 
             {/* Details */}
-            <div className="flex-1">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-xl">{tv.name}</h1>
+            <div className="flex-1 w-full">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-2 md:mb-4 drop-shadow-xl line-clamp-2 md:line-clamp-none">{tv.name}</h1>
               
-              <div className="flex items-center gap-4 text-sm text-text-secondary mb-6 font-medium">
+              <div className="flex flex-wrap items-center gap-3 md:gap-4 text-xs md:text-sm text-text-secondary mb-4 md:mb-6 font-medium">
                 <span className="flex items-center gap-1 text-gold"><span className="text-[12px]">⭐</span> {tv.vote_average?.toFixed(1)}</span>
                 <span>{tv.first_air_date ? new Date(tv.first_air_date).getFullYear() : ''}</span>
                 <span>{tv.number_of_seasons} Seasons</span>
@@ -117,23 +117,26 @@ const TVDetail = () => {
                 </div>
               </div>
 
-              <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-3xl mb-8">
+              <p className="text-white/80 text-[11px] md:text-base leading-relaxed max-w-3xl mb-6 md:mb-8 line-clamp-3 md:line-clamp-4">
                 {tv.overview}
               </p>
 
-              <div className="flex items-center gap-4 mb-10">
-                <Link to={`/player?type=tv&id=${tv.id}&season=1&episode=1`} className="bg-white hover:bg-gray-200 text-black px-8 py-3.5 rounded-full font-bold flex items-center gap-2 transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                  <Play className="w-5 h-5 fill-black" />
-                  Watch S1:E1
+              <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-10">
+                <Link 
+                  to={`/player?type=tv&id=${tv.id}&season=${selectedSeason}&episode=1`} 
+                  className="flex-1 sm:flex-none justify-center bg-white hover:bg-gray-200 text-black px-6 md:px-8 py-3 md:py-3.5 rounded-full font-bold flex items-center gap-2 transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                >
+                  <Play className="w-4 h-4 md:w-5 md:h-5 fill-black" />
+                  Watch
                 </Link>
                 <button 
                   onClick={handleWatchlist}
-                  className={`px-8 py-3.5 rounded-full font-bold flex items-center gap-2 transition-all border backdrop-blur-sm ${
+                  className={`flex-1 sm:flex-none justify-center px-6 md:px-8 py-3 md:py-3.5 rounded-full font-bold flex items-center gap-2 transition-all border backdrop-blur-sm ${
                     inWatchlist ? 'bg-accent/20 border-accent/40 text-accent' : 'bg-transparent border-white/30 text-white hover:bg-white/10'
                   }`}
                 >
-                  {inWatchlist ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                  {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                  {inWatchlist ? <Check className="w-4 h-4 md:w-5 md:h-5" /> : <Plus className="w-4 h-4 md:w-5 md:h-5" />}
+                  <span className="hidden xs:inline">{inWatchlist ? 'In List' : 'My List'}</span>
                 </button>
               </div>
 

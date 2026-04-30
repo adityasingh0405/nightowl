@@ -47,10 +47,10 @@ const Player = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-[#000E0A]/90 backdrop-blur-2xl z-[100] flex items-center justify-center p-4 md:p-12 animate-in fade-in duration-300">
+    <div className="fixed inset-0 bg-[#000E0A]/90 backdrop-blur-2xl z-[100] flex items-center justify-center p-0 md:p-12 animate-in fade-in duration-300">
       
       {/* Floating Player Container */}
-      <div className="relative w-full max-w-[1400px] aspect-video rounded-[40px] overflow-hidden bg-black shadow-[0_0_80px_rgba(0,230,186,0.15)] border border-white/10 flex flex-col group">
+      <div className="relative w-full h-[100dvh] md:h-auto md:max-w-[1400px] md:aspect-video rounded-none md:rounded-[40px] overflow-hidden bg-black shadow-none md:shadow-[0_0_80px_rgba(0,230,186,0.15)] border-0 md:border border-white/10 flex flex-col group">
         
         {/* Header Bar overlay */}
         <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-10 bg-gradient-to-b from-black/80 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">

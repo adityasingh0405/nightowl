@@ -1,5 +1,5 @@
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-const BASE_URL = "https://api.themoviedb.org/3";
+const BASE_URL = "/tmdb/api";
 
 export const fetchFromTMDB = async (endpoint) => {
   const separator = endpoint.includes("?") ? "&" : "?";
@@ -37,5 +37,5 @@ export const getTVCredits = (id) => fetchFromTMDB(`/tv/${id}/credits`);
 export const getSimilarTV = (id) => fetchFromTMDB(`/tv/${id}/similar`);
 
 // 🖼️ Image Helpers
-export const IMG_500 = "https://image.tmdb.org/t/p/w500";
-export const IMG_ORIGINAL = "https://image.tmdb.org/t/p/original";
+export const IMG_500 = "/tmdb/img/w500";
+export const IMG_ORIGINAL = "/tmdb/img/original";
